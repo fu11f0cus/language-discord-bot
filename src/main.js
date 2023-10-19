@@ -3,7 +3,8 @@ import { Client, GatewayIntentBits, Routes } from 'discord.js';
 import { REST } from '@discordjs/rest';
 import { TriviaManager } from 'discord-trivia'
 import { CategoryNames, CustomQuestionBuilder, QuestionDifficulties } from 'discord-trivia'
-import { eng__questions } from '../questions/level_test_questions.js'
+import { eng_questions, polish_questions } from '../questions-and-commands/level_test_questions.js'
+import { commands } from '../questions-and-commands/commands.js'
 
 config();
 
@@ -20,16 +21,6 @@ const client = new Client({
 });
 
 const trivia = new TriviaManager();
-
-const questions = [
-    new CustomQuestionBuilder.Boolean()
-    .setValue('true or false')
-    .setCorrectAnswer('true'),
-    new CustomQuestionBuilder.Multiple()
-    .setValue('choose an answer')
-    .setCorrectAnswer('roflan')
-    .setIncorrectAnswers(['loh', 'xz', 'idk'])
-]
 
 const rest = new REST({ version: '10' }).setToken(TOKEN);
 
@@ -49,15 +40,11 @@ function TriviaOptions(game) {
 }
 
 client.on('interactionCreate', (interaction) => {
-    if (interaction.commandName == 'order') {
-        let food = interaction.options.getString('food');
-        let drink = interaction.options.getString('drink');
-        interaction.reply({ content: `You asked about ${food} and ${drink}`});
-    }
-    if (interaction.commandName == 'trivia') {
+    const { options } = interaction;
+    if (interaction.commandName == 'trivia' && options.getString('language') == 'english') {
         const game = trivia.createGame(interaction);
         TriviaOptions(game);
-        game.setCustomQuestions(questions);
+        game.setCustomQuestions(eng_questions);
         game.setup()
         .catch(console.error);
     }
@@ -65,28 +52,6 @@ client.on('interactionCreate', (interaction) => {
 
 
 async function main() {
-
-    const commands = [{
-        name: 'trivia',
-        description: 'start trivia',
-        options: [{
-            name: 'language',
-            description: 'choose language',
-            type: 3,
-            required: true,
-            choices: [
-                {
-                    name: 'English',
-                    value: 'english'
-                }, 
-                {
-                    name: 'Polish',
-                    value: 'polish'
-                }
-            ]
-        }],
-    }];
-
     try {
         console.log('started refreshing application (/) commands.')
         await rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), {
