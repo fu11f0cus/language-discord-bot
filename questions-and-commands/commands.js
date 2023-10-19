@@ -1,6 +1,6 @@
 export const commands = [{
-    name: 'trivia',
-    description: 'start trivia',
+    name: 'langtest',
+    description: 'start langtest',
     options: [{
         name: 'language',
         description: 'choose language',
