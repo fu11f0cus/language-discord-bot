@@ -3,10 +3,13 @@ import { Client, GatewayIntentBits, Routes } from 'discord.js';
 import { REST } from '@discordjs/rest';
 import { TriviaManager } from 'discord-trivia'
 import { CategoryNames, CustomQuestionBuilder, QuestionDifficulties } from 'discord-trivia'
-import { eng_questions, polish_questions } from '../questions-and-commands/level_test_questions.js'
-import { commands } from '../questions-and-commands/commands.js'
+import { eng_questions, polish_questions } from './src/questions-and-commands/level_test_questions.js'
+import { commands } from './src/questions-and-commands/commands.js'
+
 
 config();
+
+// xcode default dark custom version
 
 const TOKEN = process.env.BOT_TOKEN;
 const CLIENT_ID = process.env.CLIENT_ID;
@@ -41,7 +44,7 @@ function TriviaOptions(game) {
 
 client.on('interactionCreate', (interaction) => {
     const { options } = interaction;
-    if (interaction.commandName == 'trivia' && options.getString('language') == 'english') {
+    if (interaction.commandName == 'langtest' && options.getString('language') == 'english') {
         const game = trivia.createGame(interaction);
         TriviaOptions(game);
         game.setCustomQuestions(eng_questions);

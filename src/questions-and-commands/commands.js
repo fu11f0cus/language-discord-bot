@@ -17,4 +17,8 @@ export const commands = [{
             }
         ]
     }],
+},
+{
+    name: 'my-points',
+    description: 'show my points'
 }];
