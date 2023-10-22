@@ -38,13 +38,14 @@ test-types {
     3. sentences with one correct answer
     4. true/false
     5. rules-knowledge test
+    6. lexical minimum test
 }
 language-rules {
     for each language level add must known rules
 }
 points {
-    1. login - +10,
-    2. completed langtest - +30,
+    1. login - +10
+    2. completed langtest - +30
     3. completed daily test - +20
     4. failed daily test - -20
     5. completed daily word to translate - +15

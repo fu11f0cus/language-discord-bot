@@ -1,0 +1,77 @@
+[
+    {
+        "question": "What color is the sky on a clear day?",
+        "options": ["Blue", "Red", "Yellow"],
+        "correctAnswerIndex": "0"
+    },
+    {
+        "question": "How many fingers do you have in one hand?",
+        "options": ["7", "5", "4"],
+        "correctAnswerIndex": "1"
+    },
+    {
+        "question": "What do you use to make a phone call?",
+        "options": ["I'm tired", "A banana", "A telephone"],
+        "correctAnswerIndex": "2"
+    },
+    {
+        "question": "Is water wet?",
+        "options": ["Maybe", "Yes", "No"],
+        "correctAnswerIndex": "1"
+    },
+    {
+        "question": "What is the 'opposite' of hot?",
+        "options": ["Freezy", "Sweet", "Cold"],
+        "correctAnswerIndex": "2"
+    },
+    {
+        "question": "When do you go to sleep at night?",
+        "options": ["At late night", "At bedtime", "At morning"],
+        "correctAnswerIndex": "1"
+    },
+    {
+        "question": "What day comes after Monday?",
+        "options": ["Tuesday", "Sunday", "Thursday"],
+        "correctAnswerIndex": "0"
+    },
+    {
+        "question": "Which sport uses a ball and net?",
+        "options": ["Swimming", "Football", "Tennis"],
+        "correctAnswerIndex": "2"
+    },
+    {
+        "question": "What is the color of banana?",
+        "options": ["Red", "Yellow", "Green"],
+        "correctAnswerIndex": "1"
+    },
+    {
+        "question": "What do you use to brush your teeth?",
+        "options": ["A toothbrush", "A knife", "A spoon"],
+        "correctAnswerIndex": "0"
+    },
+    {
+        "question": "What is the opposite of small?",
+        "options": ["Tiny", "Big", "Tall"],
+        "correctAnswerIndex": "2"
+    },
+    {
+        "question": "What do you wear on your head to keep warm in the winter?",
+        "options": ["A cap", "A hat", "A ball"],
+        "correctAnswerIndex": "1"
+    },
+    {
+        "question": "What do you do with a book?",
+        "options": ["I read it", "I smell it", "I eat it"],
+        "correctAnswerIndex": "0"
+    },
+    {
+        "question": "How do you travel on water?",
+        "options": ["By car", "By boat", "By bike"],
+        "correctAnswerIndex": "1"
+    },
+    {
+        "question": "What is the opposite of happy?",
+        "options": ["Smart", "Quiet", "Sad"],
+        "correctAnswerIndex": "2"
+    }
+]

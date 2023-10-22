@@ -1,4 +1,4 @@
-import { CustomQuestionBuilder } from 'discord-trivia'
+import { CustomQuestionBuilder } from 'discord-trivia';
 
 export const eng_questions = [
     new CustomQuestionBuilder.Boolean()

@@ -9,12 +9,14 @@
     "start:dev": "nodemon main.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "fuxksociety//",
   "license": "ISC",
   "dependencies": {
     "@discordjs/rest": "^1.0.0",
     "discord-trivia": "^2.0.3",
     "discord.js": "^14.0.3",
+    "fs": "^0.0.1-security",
+    "node-fetch": "^2.7.0",
     "nodemon": "^3.0.1"
   },
   "devDependencies": {

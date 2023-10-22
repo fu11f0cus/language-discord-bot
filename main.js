@@ -10,6 +10,7 @@ import { commands } from './src/questions-and-commands/commands.js'
 config();
 
 // xcode default dark custom version
+// one dark dark+
 
 const TOKEN = process.env.BOT_TOKEN;
 const CLIENT_ID = process.env.CLIENT_ID;
