@@ -5,7 +5,7 @@ import { TriviaManager } from 'discord-trivia'
 import { CategoryNames, CustomQuestionBuilder, QuestionDifficulties } from 'discord-trivia'
 import { eng_questions, polish_questions } from './src/questions-and-commands/level_test_questions.js'
 import { commands } from './src/questions-and-commands/commands.js'
-
+import { userLogin } from './db.js'
 
 config();
 
@@ -45,6 +45,11 @@ function TriviaOptions(game) {
 
 client.on('interactionCreate', (interaction) => {
     const { options } = interaction;
+    let userId = interaction.user.id;
+    let username = interaction.user.username;
+    let globalName = interaction.user.globalName;
+    const log = 10;
+    userLogin(userId, username, globalName, log);
     if (interaction.commandName == 'langtest' && options.getString('language') == 'english') {
         const game = trivia.createGame(interaction);
         TriviaOptions(game);
