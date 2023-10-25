@@ -3,9 +3,9 @@ import { Client, GatewayIntentBits, Routes } from 'discord.js';
 import { REST } from '@discordjs/rest';
 import { TriviaManager } from 'discord-trivia'
 import { CategoryNames, CustomQuestionBuilder, QuestionDifficulties } from 'discord-trivia'
-import { eng_questions, polish_questions } from './src/questions-and-commands/level_test_questions.js'
+import { eng_questions } from './src/questions-and-commands/level_test_questions.js'
 import { commands } from './src/questions-and-commands/commands.js'
-import { userLogin } from './db.js'
+import { userLogin, db } from './db.js'
 
 config();
 
@@ -48,14 +48,21 @@ client.on('interactionCreate', (interaction) => {
     let userId = interaction.user.id;
     let username = interaction.user.username;
     let globalName = interaction.user.globalName;
-    const log = 10;
-    userLogin(userId, username, globalName, log);
+    userLogin(userId, username, globalName, 10);
     if (interaction.commandName == 'langtest' && options.getString('language') == 'english') {
         const game = trivia.createGame(interaction);
         TriviaOptions(game);
         game.setCustomQuestions(eng_questions);
         game.setup()
         .catch(console.error);
+    }
+    if (interaction.commandName == 'my-points') {
+        db.each("SELECT points FROM users", (err, row) => {
+            if (err) {
+                console.error(err);
+            }
+            interaction.reply(`You have ${row.points} points`);
+        })
     }
 })
 
