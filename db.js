@@ -1,6 +1,7 @@
-import sqlite3 from 'sqlite3';
+const sqlite3 = require('sqlite3');
+const { eng_level_test } = require('./src/questions-and-commands/level_test_questions.js');
 
-export const db = new sqlite3.Database('discord-bot.db');
+const db = new sqlite3.Database('discord-bot.db');
 
 db.serialize(() => {
     db.run("CREATE TABLE IF NOT EXISTS users (id INT UNIQUE, name TEXT, globalname TEXT, points INT)");
@@ -15,6 +16,13 @@ db.serialize(() => {
     engA1trueFalse.run('5', '"The book, which I read, was very interesting" - это пример ограничительной придаточной части', 'true', 'false', 'true');
     engA1trueFalse.finalize();
 
+    db.run("CREATE TABLE IF NOT EXISTS eng_level_test (id INT UNIQUE, question TEXT, option1 TEXT, option2 TEXT, option3 TEXT, correct TEXT)");
+    const eng_level_test_push = db.prepare("INSERT OR IGNORE INTO eng_level_test VALUES (?, ?, ?, ?, ?, ?)");
+    for (let i = 0; i < eng_level_test.length; i++) {
+        let question = eng_level_test[i];
+        eng_level_test_push.run(i, question.question, question.option1, question.option2, question.option3, question.correct);
+    }
+
     // db.each("SELECT id, name, option1, option2, option3, correct FROM english_A1_questions", (err, row) => {
     //     if (err) {
     //         console.error(err);
@@ -23,8 +31,13 @@ db.serialize(() => {
     // })
 })
 
-export function userLogin(id, name, globalName, points) {
+const userLogin = function(id, name, globalName, points) {
     const userPush = db.prepare("INSERT OR IGNORE INTO users VALUES (?, ?, ?, ?)");
     userPush.run(id, name, globalName, points);
     userPush.finalize();
+}
+
+module.exports = {
+    db,
+    userLogin
 }

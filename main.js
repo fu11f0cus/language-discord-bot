@@ -1,11 +1,12 @@
-import { config } from 'dotenv';
-import { Client, GatewayIntentBits, Routes } from 'discord.js';
-import { REST } from '@discordjs/rest';
-import { TriviaManager } from 'discord-trivia'
-import { CategoryNames, CustomQuestionBuilder, QuestionDifficulties } from 'discord-trivia'
-import { eng_questions } from './src/questions-and-commands/level_test_questions.js'
-import { commands } from './src/questions-and-commands/commands.js'
-import { userLogin, db } from './db.js'
+const { config } = require('dotenv');
+const { Client, GatewayIntentBits, Routes } = require('discord.js');
+const { REST } = require('@discordjs/rest');
+const { TriviaManager } = require('discord-trivia');
+const { CategoryNames, CustomQuestionBuilder, QuestionDifficulties } = require('discord-trivia');
+const { eng_questions } = require('./src/questions-and-commands/level_test_questions.js');
+const { commands } = require('./src/questions-and-commands/commands.js');
+const { userLogin, db } = require('./db.js');
+const { quizBuilder } = require('./src/quiz/eng_level_quiz.js');
 
 config();
 
@@ -63,6 +64,9 @@ client.on('interactionCreate', (interaction) => {
             }
             interaction.reply(`You have ${row.points} points`);
         })
+    }
+    if (interaction.commandName == 'eng-level-test') {
+        quizBuilder();
     }
 })
 
