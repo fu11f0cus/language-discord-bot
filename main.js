@@ -6,7 +6,9 @@ const { CategoryNames, CustomQuestionBuilder, QuestionDifficulties } = require('
 const { eng_questions } = require('./src/questions-and-commands/level_test_questions.js');
 const { commands } = require('./src/questions-and-commands/commands.js');
 const { userLogin, db } = require('./db.js');
-const { quizBuilder } = require('./src/quiz/eng_level_quiz.js');
+const { quizBuilder, answerHandler } = require('./src/quiz/eng_level_quiz.js');
+const { loginPoints } = require('./src/points/points.js');
+const { slashCommandsHandler } = require('./src/commands-handler.js');
 
 config();
 
@@ -50,23 +52,28 @@ client.on('interactionCreate', (interaction) => {
     let username = interaction.user.username;
     let globalName = interaction.user.globalName;
     userLogin(userId, username, globalName, 10);
-    if (interaction.commandName == 'langtest' && options.getString('language') == 'english') {
-        const game = trivia.createGame(interaction);
-        TriviaOptions(game);
-        game.setCustomQuestions(eng_questions);
-        game.setup()
-        .catch(console.error);
-    }
-    if (interaction.commandName == 'my-points') {
-        db.each("SELECT points FROM users", (err, row) => {
-            if (err) {
-                console.error(err);
-            }
-            interaction.reply(`You have ${row.points} points`);
-        })
-    }
-    if (interaction.commandName == 'eng-level-test') {
-        quizBuilder();
+    slashCommandsHandler(interaction);
+    // if (interaction.commandName == 'langtest' && options.getString('language') == 'english') {
+    //     const game = trivia.createGame(interaction);
+    //     TriviaOptions(game);
+    //     game.setCustomQuestions(eng_questions);
+    //     game.setup()
+    //     .catch(console.error);
+    // }
+    // if (interaction.commandName == 'my-points') {
+    //     loginPoints(interaction.user.id);
+    //     db.each("SELECT points FROM users", (err, row) => {
+    //         if (err) {
+    //             console.error(err);
+    //         }
+    //         interaction.reply(`You have ${row.points} points`);
+    //     })
+    // }
+    // if (interaction.commandName == 'eng-level-test') {
+    //     quizBuilder(interaction);
+    // }
+    if (interaction.isButton()) {
+        answerHandler(interaction);
     }
 })
 
