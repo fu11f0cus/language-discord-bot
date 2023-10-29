@@ -28,6 +28,10 @@ const commands = [
   {
     name: 'daily',
     description: 'get your daily points'
+  },
+  {
+    name: 'login',
+    description: 'login/register in bot system'
   }
 ];
 

@@ -3,7 +3,8 @@ const { eng_level_test, eng_trueFalse } = require('./src/questions-and-commands/
 
 const db = new sqlite3.Database('discord-bot.db');
 
-db.serialize(() => {
+const databasePushing = () => {
+    db.serialize(() => {
     db.run("CREATE TABLE IF NOT EXISTS users (id INT UNIQUE, name TEXT, globalname TEXT, points INT)");
     db.run("CREATE TABLE IF NOT EXISTS english_A1_questions (id INTEGER PRIMARY KEY UNIQUE, name TEXT, option1 TEXT, option2 TEXT, option3 TEXT, correct TEXT)");
     const engA1 = db.prepare("INSERT OR IGNORE INTO english_A1_questions VALUES (?, ?, ?, ?, ?, ?)");
@@ -20,14 +21,8 @@ db.serialize(() => {
         let question = eng_trueFalse[i];
         engA1trueFalse_push.run(i, question.question_text, question.option1, question.option2, question.correct);
     }
-
-    // db.each("SELECT id, name, option1, option2, option3, correct FROM english_A1_questions", (err, row) => {
-    //     if (err) {
-    //         console.error(err);
-    //     }
-    //     console.log(row.id, row.name, row.option1, row.option2, row.option3, row.correct);
-    // })
-})
+});
+}
 
 const userLogin = function(id, name, globalName, points) {
     const userPush = db.prepare("INSERT OR IGNORE INTO users VALUES (?, ?, ?, ?)");

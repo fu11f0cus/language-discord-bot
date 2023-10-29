@@ -38,10 +38,6 @@ client.on('ready', () => {
 
 client.on('interactionCreate', (interaction) => {
     const { options } = interaction;
-    let userId = interaction.user.id;
-    let username = interaction.user.username;
-    let globalName = interaction.user.globalName;
-    userLogin(userId, username, globalName, 10);
     slashCommandsHandler(interaction);
     if (interaction.isButton()) {
         answerHandler(interaction);
