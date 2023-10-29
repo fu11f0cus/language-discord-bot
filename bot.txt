@@ -5,6 +5,7 @@ commands {
     3. test (options: default, sprint, onelife) - test with chosen mode
     4. true-false - true/false test
     5. sentence - sentence with one correct answer
+    6. daily - get daily points
 }
 languages-to-learn {
     1. english

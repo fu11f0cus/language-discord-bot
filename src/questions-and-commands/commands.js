@@ -1,6 +1,6 @@
 const commands = [
   {
-    name: "langtest",
+    name: "eng-level-test",
     description: "start langtest",
     options: [
       {
@@ -26,9 +26,9 @@ const commands = [
     description: "show my points",
   },
   {
-    name: "eng-level-test",
-    description: "test your english language level",
-  },
+    name: 'daily',
+    description: 'get your daily points'
+  }
 ];
 
 module.exports = {

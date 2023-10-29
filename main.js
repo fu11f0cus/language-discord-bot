@@ -27,8 +27,6 @@ const client = new Client({
     ]
 });
 
-const trivia = new TriviaManager();
-
 const rest = new REST({ version: '10' }).setToken(TOKEN);
 
 client.login(TOKEN);
@@ -37,14 +35,6 @@ client.on('ready', () => {
     console.log(`${client.user.tag} has logged in`);
 })
 
-function TriviaOptions(game) {
-    game.setGameOptions({
-        minPlayerCount: 1
-    })
-    game.setQuestionOptions({
-        amount: 1
-    })
-}
 
 client.on('interactionCreate', (interaction) => {
     const { options } = interaction;
@@ -53,25 +43,6 @@ client.on('interactionCreate', (interaction) => {
     let globalName = interaction.user.globalName;
     userLogin(userId, username, globalName, 10);
     slashCommandsHandler(interaction);
-    // if (interaction.commandName == 'langtest' && options.getString('language') == 'english') {
-    //     const game = trivia.createGame(interaction);
-    //     TriviaOptions(game);
-    //     game.setCustomQuestions(eng_questions);
-    //     game.setup()
-    //     .catch(console.error);
-    // }
-    // if (interaction.commandName == 'my-points') {
-    //     loginPoints(interaction.user.id);
-    //     db.each("SELECT points FROM users", (err, row) => {
-    //         if (err) {
-    //             console.error(err);
-    //         }
-    //         interaction.reply(`You have ${row.points} points`);
-    //     })
-    // }
-    // if (interaction.commandName == 'eng-level-test') {
-    //     quizBuilder(interaction);
-    // }
     if (interaction.isButton()) {
         answerHandler(interaction);
     }

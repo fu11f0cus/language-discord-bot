@@ -6,7 +6,6 @@ const { quizBuilder } = require('./quiz/eng_level_quiz.js');
 const slashCommandsHandler = (interaction) => {
     const { options } = interaction;
     if (interaction.commandName == 'my-points') {
-        loginPoints(interaction);
         db.each("SELECT id, points FROM users", (err, row) => {
             if (err) {
                 console.error(err);
@@ -14,16 +13,14 @@ const slashCommandsHandler = (interaction) => {
             interaction.reply(`You have ${row.points} points`);
         })
     }
-    if (interaction.commandName == 'langtest' && options.getString('language') == 'english') {
-        const game = trivia.createGame(interaction);
-        TriviaOptions(game);
-        game.setCustomQuestions(eng_questions);
-        game.setup()
-        .catch(console.error);
+    if (interaction.commandName == 'daily') {
+        loginPoints(interaction.user.id);
+        interaction.reply('You just received 10 points. Claim another 10 points in 24 hours');
     }
-    if (interaction.commandName == 'eng-level-test') {
+    if (interaction.commandName == 'eng-level-test' && options.getString('language') == 'english') {
         quizBuilder(interaction);
     }
+
 };
 
 module.exports = {
