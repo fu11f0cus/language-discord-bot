@@ -1,20 +1,12 @@
 const { db } = require('../../db.js');
 
 const pointsUpdate = (points, userId) => {
-    db.each("SELECT id, points FROM users", (err, row) => {
+    const sql = "UPDATE users SET points = points + ? WHERE id = ?";
+    db.run(sql, [points, userId], (err) => {
         if (err) {
             console.error(err);
         }
-        if (userId == row.id) {
-            row.points += points;
-            const updateRequest = `UPDATE users SET points = ${row.points}`;
-            db.run(updateRequest, [], (err) => {
-                if (err) {
-                    console.error(err);
-                }
-                console.log('succesfully updated');
-            })
-        }
+        console.log('succesfully updated');
     })
 }
 
