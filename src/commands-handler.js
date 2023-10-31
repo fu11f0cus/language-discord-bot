@@ -36,6 +36,7 @@ const slashCommandsHandler = async (interaction) => {
         interaction.reply('You just received 10 points. Claim another 10 points in 24 hours');
     }
     if (interaction.commandName == 'eng-level-test' && options.getString('language') == 'english') {
+        interaction.reply('Starting test...');
         quizBuilder(interaction);
     }
 
