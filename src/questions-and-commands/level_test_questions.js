@@ -81,189 +81,189 @@ const eng_level_test = [
     option1: "is",
     option2: "are",
     option3: "am",
-    correct: "am",
+    correct: "3",
   },
   {
     question: "My girlfriend is ... artist",
     option1: "the",
     option2: "an",
     option3: "a",
-    correct: "an",
+    correct: "2",
   },
   {
     question: "This is my friend. ... name is Oscar",
     option1: "her",
     option2: "his",
     option3: "yours",
-    correct: "his",
+    correct: "2",
   },
   {
     question: "Matt is ...",
     option1: "my brother's friend",
     option2: "my brother friend's",
     option3: "friend from my brother",
-    correct: "my brother's friend",
+    correct: "1",
   },
   {
     question: "... 20 chairs in the office",
     option1: "There is",
     option2: "There are",
     option3: "This is",
-    correct: "There are",
+    correct: "2",
   },
   {
     question: "Melissa ... horror films",
     option1: "isn't like",
     option2: "don't like",
-    option3: "doesnt't like",
-    correct: "doesn't like",
+    option3: "doesn't like",
+    correct: "3",
   },
   {
     question: "Sorry, I can't talk. I ... right now",
     option1: "driving",
     option2: "drives",
     option3: "'m driving",
-    correct: "'m driving",
+    correct: "3",
   },
   {
     question: "He ... at the office last week",
     option1: "wasn't",
     option2: "didn't be",
     option3: "isn't",
-    correct: "wasn't",
+    correct: "1",
   },
   {
     question: "I ... the film last night",
     option1: "liked",
     option2: "likes",
     option3: "like",
-    correct: "liked",
+    correct: "1",
   },
   {
     question: "... a piece of cake? No, thank you",
     option1: "Do you like",
     option2: "Would you like",
     option3: "Are you like",
-    correct: "Would you like",
+    correct: "2",
   },
   {
     question: "The kitchen is ... than the bathroom",
     option1: "bigger",
     option2: "more big",
     option3: "more bigger",
-    correct: "bigger",
+    correct: "1",
   },
   {
     question: "The sightseeing bus is very old. We're going ... a new bus soon",
     option1: "buy",
     option2: "to buy",
     option3: "buying",
-    correct: "to buy",
+    correct: "2",
   },
   {
     question: "Jennifer is a vegeterian. She ... meat",
     option1: "often eats",
     option2: "usually eats",
     option3: "never eats",
-    correct: "never eats",
+    correct: "3",
   },
   {
     question: "There aren't ... buses late in the evening",
     option1: "some",
     option2: "any",
     option3: "no",
-    correct: "any",
+    correct: "2",
   },
   {
     question: "The car park is ... to the restaurant",
     option1: "next",
     option2: "behind",
     option3: "in front",
-    correct: "next",
+    correct: "1",
   },
   {
     question: "Angelina ... shopping every day",
     option1: "go",
     option2: "is going",
     option3: "goes",
-    correct: "goes",
+    correct: "3",
   },
   {
     question: "They ... in the park when it started to rain heavily",
     option1: "walked",
     option2: "were walking",
     option3: "are walking",
-    correct: "were walking",
+    correct: "2",
   },
   {
     question: "... seen a falling star before?",
     option1: "Did you ever",
     option2: "Are you ever",
     option3: "Have you ever",
-    correct: "Have you ever",
+    correct: "3",
   },
   {
     question: "We've been friends ... many years",
     option1: "for",
     option2: "since",
     option3: "during",
-    correct: "for",
+    correct: "1",
   },
   {
     question: "You ... pay for the tickets. They're free",
     option1: "have to",
     option2: "don't need to",
     option3: "doesn't have to",
-    correct: "don't need to",
+    correct: "2",
   },
   {
     question: "Jennifer was ill last week and he ... go out",
     option1: "can't",
     option2: "couldn't",
     option3: "needn't",
-    correct: "couldn't",
+    correct: "2",
   },
   {
     question: "There are the photos ... I took on holiday",
     option1: "which",
     option2: "what",
     option3: "where",
-    correct: "which",
+    correct: "1",
   },
   {
     question: "We'll stay at home if it ... this afternoon",
     option1: "raining",
     option2: "rains",
     option3: "will rain",
-    correct: "will rain", // ?
+    correct: "3", // ?
   },
   {
     question: "He doesn't smoke now, but he ... a lot when he was young",
     option1: "has smoked",
     option2: "used to smoke",
     option3: "was smoked",
-    correct: "was smoked", // ?
+    correct: "3", // ?
   },
   {
     question: "Michael plays basketball ... anyone else I know",
     option1: "better than",
     option2: "more good than",
     option3: "as better as",
-    correct: "better than",
+    correct: "1",
   },
   {
     question: "I promise I ... you as soon as I've finished this cleaning",
     option1: "will help",
     option2: "going to help",
     option3: "am helping",
-    correct: "will help",
+    correct: "1",
   },
   {
     question: "This town ... by lots of tourists during the summer",
     option1: "visits",
     option2: "visited",
     option3: "is visited",
-    correct: "is visited",
+    correct: "3",
   },
   {
     question:
@@ -271,49 +271,49 @@ const eng_level_test = [
     option1: "didn't want",
     option2: "weren't",
     option3: "aren't wanting",
-    correct: "didn't want",
+    correct: "1",
   },
   {
     question: "How about ... to the cinema tonight?",
     option1: "going",
     option2: "to go",
     option3: "for going",
-    correct: "to go",
+    correct: "2",
   },
   {
     question: "Excuse me, can you ... me the way to the station, please?",
     option1: "give",
     option2: "say",
     option3: "tell",
-    correct: "say",
+    correct: "2",
   },
   {
     question: "I wasn't interested in the performance very much. ...",
     option1: "So I wasn't",
     option2: "I didn't, too",
     option3: "Neither was I",
-    correct: "", // ? option4 - Nor I did
+    correct: "1", // ? option4 - Nor I did
   },
   {
     question: "Take a warm coat, ... you might get very cold outside",
     option1: "otherwise",
     option2: "so that",
     option3: "in case",
-    correct: "otherwise",
+    correct: "1",
   },
   {
     question: "... this great book and I can't wait to see how it ends",
     option1: "I don't read",
     option2: "I've read",
     option3: "I've been reading",
-    correct: "I've been reading",
+    correct: "3",
   },
   {
     question: "What I like more than anything else ... at weekends",
     option1: "playing golf",
     option2: "to play golf",
     option3: "is playing golf",
-    correct: "is playing golf",
+    correct: "3",
   },
   {
     question:
@@ -321,7 +321,7 @@ const eng_level_test = [
     option1: "looked",
     option2: "had been looked",
     option3: "had been looking",
-    correct: "had been looking",
+    correct: "3",
   },
   {
     question:
@@ -329,14 +329,14 @@ const eng_level_test = [
     option1: "if",
     option2: "unless",
     option3: "except",
-    correct: "unless",
+    correct: "2",
   },
   {
     question: "If I hadn't replied to your email, I ... here with you now",
     option1: "can't be",
     option2: "wouldn't be",
     option3: "won't be",
-    correct: "wouldn't be",
+    correct: "2",
   },
   {
     question:
@@ -344,21 +344,21 @@ const eng_level_test = [
     option1: "finish",
     option2: "are finishing",
     option3: "will have finished",
-    correct: "", // ? option4 - are finished
+    correct: "1", // ? option4 - are finished
   },
   {
     question: "I don't remember mentioning ... dinner together tonight",
     option1: "go for",
     option2: "to go for",
     option3: "going for",
-    correct: "to go for", // ? option4 - you going to
+    correct: "2", // ? option4 - you going to
   },
   {
     question: "Was it Captain Cook ... New Zealand?",
     option1: "who discovered",
     option2: "discovered",
     option3: "who was discovering",
-    correct: "discovered", // ? option4 - that discover
+    correct: "2", // ? option4 - that discover
   },
   {
     question:
@@ -366,85 +366,78 @@ const eng_level_test = [
     option1: "tell it off",
     option2: "sort itself out",
     option3: "put up with it",
-    correct: "", // ? option4 - put it off
+    correct: "3", // ? option4 - put it off
   },
   {
     question: "It's cold so you should ... on a warm jacket",
     option1: "put",
     option2: "wear",
     option3: "dress",
-    correct: "put", // ? option4 - take
+    correct: "1", // ? option4 - take
   },
   {
     question: "Lola will look ... our dogs while we're on holiday",
     option1: "at",
     option2: "for",
     option3: "into",
-    correct: "for",
+    correct: "2",
   },
   {
     question: "She ... a lot of her free time reading",
     option1: "does",
     option2: "spends",
     option3: "has",
-    correct: "spends", // ? option4 - makes
+    correct: "2", // ? option4 - makes
   },
   {
     question: "She ... a lot of her free time reading",
     option1: "does",
     option2: "spends",
     option3: "has",
-    correct: "spends", // ? option4 - makes
+    correct: "2", // ? option4 - makes
   },
   {
     question: "Hello, this is jack. Could I ... to Sharon, please?",
     option1: "say",
     option2: "speak",
     option3: "call",
-    correct: "speak",
+    correct: "2",
   },
   {
     question: "They're coming to our house ... Sunday",
     option1: "at",
     option2: "on",
     option3: "in",
-    correct: "on",
+    correct: "2",
   },
   {
     question: "I think it's very easy to ... debt these days",
     option1: "go into",
     option2: "go down to",
     option3: "get into",
-    correct: "get into", // ? option4 - become
+    correct: "3", // ? option4 - become
   },
   {
     question: "Come on! Quick! Let's get ... !",
     option1: "highlight",
     option2: "cracking",
     option3: "massive",
-    correct: "highlight",
+    correct: "1",
   },
   {
     question: "I phoned her ... I heard the news",
     option1: "during",
     option2: "by the time",
     option3: "the moment",
-    correct: "by the time", // ? option4 - minute
+    correct: "2", // ? option4 - minute
   },
   {
     question: "I feel very .... I'm going to go to bed!",
     option1: "nap",
     option2: "sleepy",
     option3: "asleep",
-    correct: "sleepy", // ? option4 - sleeper
-  },
-  {
-    question: "I feel very .... I'm going to go to bed!",
-    option1: "nap",
-    option2: "sleepy",
-    option3: "asleep",
-    correct: "sleepy", // ? option4 - sleeper
-  },
+    correct: "2", // ? option4 - sleeper
+  }
 ];
 
 module.exports = {

@@ -24,6 +24,7 @@ const databasePushing = () => {
 });
 }
 
+
 const userLogin = function(id, name, globalName, points) {
     const userPush = db.prepare("INSERT OR IGNORE INTO users VALUES (?, ?, ?, ?)");
     userPush.run(id, name, globalName, points);

@@ -1,5 +1,5 @@
 const { db, userLogin } = require('../db.js');
-const { loginPoints } = require('./points/points.js');
+const { loginPoints, checkMyPoints } = require('./points/points.js');
 const { TriviaManager } = require('discord-trivia');
 const { quizBuilder } = require('./quiz/eng_level_quiz.js');
 
@@ -24,12 +24,7 @@ const slashCommandsHandler = async (interaction) => {
         })
     }
     if (interaction.commandName == 'my-points') {
-        db.each("SELECT id, points FROM users", (err, row) => {
-            if (err) {
-                console.error(err);
-            }
-            interaction.reply(`You have ${row.points} points`);
-        })
+        checkMyPoints(interaction, interaction.user.id);
     }
     if (interaction.commandName == 'daily') {
         loginPoints(interaction.user.id);

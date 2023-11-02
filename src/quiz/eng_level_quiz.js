@@ -2,9 +2,20 @@ const { EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, ButtonIntera
 const { eng_level_test } = require('../questions-and-commands/level_test_questions');
 
 
+let notAnswered = 0;
+let correctAnswers = 0;
+let incorrectAnswers = 0;
+
 const quizBuilder = function(interaction, index = 0) {
     if (index >= eng_level_test.length) {
-        interaction.reply('Test completed');
+        interaction.channel.send('Test completed');
+        interaction.channel.send(`Correct answers - ${correctAnswers}`);
+        interaction.channel.send(`Incorrect answers - ${incorrectAnswers}`);
+        return;
+    }
+    if (notAnswered == 3) {
+        notAnswered = 0;
+        interaction.channel.send('You have not answered for 3 questions in a row. Test is over.')
         return;
     }
 
@@ -31,18 +42,21 @@ const quizBuilder = function(interaction, index = 0) {
         interaction.channel.awaitMessageComponent({ filter, time: 15000 })
         .then((buttonInteraction) => {
             const userAnswer = buttonInteraction.customId;
-            console.log('user - ' + userAnswer);
-            console.log('correct - ' + correct);
+            // console.log('user - ' + userAnswer);
+            // console.log('correct - ' + correct);
             if (userAnswer == correct) {
+                correctAnswers++;
                 interaction.followUp('correct')
             }
             else {
+                incorrectAnswers++;
                 interaction.followUp('incorrect');
             }
             setTimeout(() => quizBuilder(interaction, index + 1), 2000)
         })
         .catch(() => {
-            interaction.followUp('time is up!')
+            interaction.followUp('time is up!');
+            notAnswered++;
             setTimeout(() => quizBuilder(interaction, index + 1), 2000);
         })
     })

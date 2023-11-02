@@ -1,5 +1,14 @@
 const { db } = require('../../db.js');
 
+const checkMyPoints = (interaction, userId) => {
+    db.get("SELECT id, points FROM users WHERE id = ?", [userId], (err, row) => {
+        if (err) {
+            console.error(err);
+        }
+        interaction.reply(`You have ${row.points} points`);
+    })
+}
+
 const pointsUpdate = (points, userId) => {
     const sql = "UPDATE users SET points = points + ? WHERE id = ?";
     db.run(sql, [points, userId], (err) => {
@@ -41,4 +50,5 @@ module.exports = {
     dailyTestPoints,
     dailyWordPoints,
     learnStreak,
+    checkMyPoints
 }
