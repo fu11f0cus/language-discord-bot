@@ -5,7 +5,7 @@ const commands = [
     options: [
       {
         name: "language",
-        description: "choose language",
+        description: "choose a language",
         type: 3,
         required: true,
         choices: [
@@ -32,6 +32,28 @@ const commands = [
   {
     name: 'login',
     description: 'login/register in bot system'
+  },
+  {
+    name: 'my-level',
+    description: 'shows your language level',
+    options: [
+      {
+        name: 'language',
+        description: 'choose a language',
+        type: 3,
+        required: true,
+        choices: [
+          {
+            name: 'English',
+            value: 'english'
+          },
+          {
+            name: 'Polish',
+            value: 'polish'
+          }
+        ]
+      }
+    ]
   }
 ];
 

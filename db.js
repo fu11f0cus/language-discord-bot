@@ -21,8 +21,13 @@ const databasePushing = () => {
         let question = eng_trueFalse[i];
         engA1trueFalse_push.run(i, question.question_text, question.option1, question.option2, question.correct);
     }
+    db.run("CREATE TABLE IF NOT EXISTS english_A1_rules (name TEXT, description TEXT, example TEXT)");
+    db.run("CREATE TABLE IF NOT EXISTS english_A2_rules (name TEXT, description TEXT, example TEXT)");
+    db.run("CREATE TABLE IF NOT EXISTS english_B1_rules (name TEXT, description TEXT, example TEXT)");
+    db.run("CREATE TABLE IF NOT EXISTS english_B2_rules (name TEXT, description TEXT, example TEXT)");
 });
 }
+
 
 const usersTableWithKnowledge = () => {
     db.run("CREATE TABLE IF NOT EXISTS usersWithKnowledge (id INT UNIQUE, name TEXT, globalname TEXT)");
@@ -38,6 +43,15 @@ const userEnglishLevel = (engLevel, userId) => {
     })
 }
 
+const getUserLevel = (interaction, userId) => {
+    db.get("SELECT id, engLevel FROM users WHERE id = ?", [userId], (err, row) => {
+        if (err) {
+            console.error(err);
+        }
+        interaction.reply(`Your english level is ${row.engLevel}`)
+    })
+}
+
 const userLogin = function(id, name, globalName, points) {
     const userPush = db.prepare("INSERT OR IGNORE INTO users VALUES (?, ?, ?, ?, ?, ?)");
     userPush.run(id, name, globalName, points, 'no data', 'no data');
@@ -47,5 +61,6 @@ const userLogin = function(id, name, globalName, points) {
 module.exports = {
     db,
     userLogin,
-    userEnglishLevel
+    userEnglishLevel,
+    getUserLevel,
 }

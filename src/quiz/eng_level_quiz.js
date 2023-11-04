@@ -1,6 +1,6 @@
 const { EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, ButtonInteraction } = require('discord.js');
 const { eng_level_test } = require('../questions-and-commands/level_test_questions');
-const { userEnglishLevel } = require('../../db.js');
+const { userEnglishLevel, getUserLevel } = require('../../db.js');
 const { languageTestPoints } = require('../points/points.js');
 
 
@@ -12,12 +12,18 @@ const WEEK = 604800;
 
 const quizBuilder = function(interaction, index = 0) {
     if (index >= eng_level_test.length) {
-        interaction.channel.send('Test completed');
-        interaction.channel.send(`Correct answers - ${correctAnswers}`);
-        interaction.channel.send(`Incorrect answers - ${incorrectAnswers}`);
-        if (correctAnswers < 10) {
+        if (correctAnswers < 15) {
             userEnglishLevel('A1', interaction.user.id);
         }
+        else if (correctAnswers >= 15 && correctAnswers < 40) {
+            userEnglishLevel('A2', interaction.user.id);
+        }
+        else {
+            userEnglishLevel('B1', interaction.user.id);
+        }
+        interaction.channel.send('Test completed!');
+        interaction.channel.send(`Correct answers - ${correctAnswers} \nIncorrect answers - ${incorrectAnswers}`);
+        interaction.channel.send(`Your english level is ${getUserLevel(interaction.user.id)}`);
         languageTestPoints(interaction.user.id);
         return;
     }
