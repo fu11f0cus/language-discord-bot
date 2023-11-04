@@ -5,7 +5,7 @@ const db = new sqlite3.Database('discord-bot.db');
 
 const databasePushing = () => {
     db.serialize(() => {
-    db.run("CREATE TABLE IF NOT EXISTS users (id INT UNIQUE, name TEXT, globalname TEXT, points INT)");
+    db.run("CREATE TABLE IF NOT EXISTS users (id INT UNIQUE, name TEXT, globalname TEXT, points INT, engLevel TEXT, polishLevel TEXT)");
     db.run("CREATE TABLE IF NOT EXISTS english_A1_questions (id INTEGER PRIMARY KEY UNIQUE, name TEXT, option1 TEXT, option2 TEXT, option3 TEXT, correct TEXT)");
     const engA1 = db.prepare("INSERT OR IGNORE INTO english_A1_questions VALUES (?, ?, ?, ?, ?, ?)");
 
@@ -24,14 +24,28 @@ const databasePushing = () => {
 });
 }
 
+const usersTableWithKnowledge = () => {
+    db.run("CREATE TABLE IF NOT EXISTS usersWithKnowledge (id INT UNIQUE, name TEXT, globalname TEXT)");
+}
+
+const userEnglishLevel = (engLevel, userId) => {
+    const request = "UPDATE users SET engLevel = ? WHERE id = ?";
+    db.run(request, [engLevel, userId], (err) => {
+        if (err) {
+            console.error(err);
+        }
+        console.log('level has been updated');
+    })
+}
 
 const userLogin = function(id, name, globalName, points) {
-    const userPush = db.prepare("INSERT OR IGNORE INTO users VALUES (?, ?, ?, ?)");
-    userPush.run(id, name, globalName, points);
+    const userPush = db.prepare("INSERT OR IGNORE INTO users VALUES (?, ?, ?, ?, ?, ?)");
+    userPush.run(id, name, globalName, points, 'no data', 'no data');
     userPush.finalize();
 }
 
 module.exports = {
     db,
-    userLogin
+    userLogin,
+    userEnglishLevel
 }
