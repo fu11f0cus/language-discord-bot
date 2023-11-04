@@ -24,6 +24,8 @@ const databasePushing = () => {
 });
 }
 
+databasePushing();
+
 const usersTableWithKnowledge = () => {
     db.run("CREATE TABLE IF NOT EXISTS usersWithKnowledge (id INT UNIQUE, name TEXT, globalname TEXT)");
 }
