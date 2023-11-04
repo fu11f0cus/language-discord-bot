@@ -1,7 +1,7 @@
 const commands = [
   {
-    name: "eng-level-test",
-    description: "start langtest",
+    name: "language-level-test",
+    description: "start language test",
     options: [
       {
         name: "language",

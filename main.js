@@ -1,8 +1,6 @@
 const { config } = require('dotenv');
 const { Client, GatewayIntentBits, Routes } = require('discord.js');
 const { REST } = require('@discordjs/rest');
-const { TriviaManager } = require('discord-trivia');
-const { CategoryNames, CustomQuestionBuilder, QuestionDifficulties } = require('discord-trivia');
 const { eng_questions } = require('./src/questions-and-commands/level_test_questions.js');
 const { commands } = require('./src/questions-and-commands/commands.js');
 const { userLogin, db } = require('./db.js');

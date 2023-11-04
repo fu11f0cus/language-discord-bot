@@ -1,11 +1,14 @@
 const { EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, ButtonInteraction } = require('discord.js');
 const { eng_level_test } = require('../questions-and-commands/level_test_questions');
 const { userEnglishLevel } = require('../../db.js');
+const { languageTestPoints } = require('../points/points.js');
 
 
 let notAnswered = 0;
 let correctAnswers = 0;
 let incorrectAnswers = 0;
+
+const WEEK = 604800;
 
 const quizBuilder = function(interaction, index = 0) {
     if (index >= eng_level_test.length) {
@@ -15,6 +18,7 @@ const quizBuilder = function(interaction, index = 0) {
         if (correctAnswers < 10) {
             userEnglishLevel('A1', interaction.user.id);
         }
+        languageTestPoints(interaction.user.id);
         return;
     }
     if (notAnswered == 3) {
