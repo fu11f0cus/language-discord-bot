@@ -1,7 +1,7 @@
 const { db, userLogin } = require('../db.js');
 const { loginPoints, checkMyPoints } = require('./points/points.js');
 const { quizBuilder } = require('./quiz/eng_level_quiz.js');
-const { getUserLevel } = require('../db.js');
+const { getUserLevel, getEnglishA1Rule } = require('../db.js');
 
 const DAY = 86400;
 
@@ -36,10 +36,28 @@ const slashCommandsHandler = async (interaction) => {
         interaction.reply('Starting test. You have 15 seconds for each question.');
         quizBuilder(interaction);
     }
-    if (interaction.commandName == 'my-level' && options.getString('language') == 'english') {
-        getUserLevel(interaction, interaction.user.id);
+    if (interaction.commandName == 'my-level') {
+        if (options.getString('language') == 'english') {
+            getUserLevel(interaction, interaction.user.id, 'english');
+        }
+        if (options.getString('language') == 'polish') {
+            getUserLevel(interaction, interaction.user.id, 'polish');
+        }
     }
-
+    if (interaction.commandName == 'english-a1-rules') {
+        if (options.getString('rule') == 'presentSimple') {
+            getEnglishA1Rule(interaction, 'presentSimple');
+        }
+        if (options.getString('rule') == 'pastSimple') {
+            getEnglishA1Rule(interaction, 'pastSimple');
+        }
+        if (options.getString('rule') == 'presentContinious') {
+            getEnglishA1Rule(interaction, 'presentContinious');
+        }
+        if (options.getString('rule') == 'pastContinious') {
+            getEnglishA1Rule(interaction, 'pastContinious');
+        }
+    }
 };
 
 module.exports = {

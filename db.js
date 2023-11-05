@@ -1,5 +1,6 @@
 const sqlite3 = require('sqlite3');
 const { eng_level_test, eng_trueFalse } = require('./src/questions-and-commands/level_test_questions.js');
+const { times } = require('./src/rules/english_A1_rules.js')
 
 const db = new sqlite3.Database('discord-bot.db');
 
@@ -29,8 +30,12 @@ const databasePushing = () => {
 }
 
 
-const usersTableWithKnowledge = () => {
-    db.run("CREATE TABLE IF NOT EXISTS usersWithKnowledge (id INT UNIQUE, name TEXT, globalname TEXT)");
+const englishA1Rules = () => {
+    const rules = db.prepare("INSERT OR IGNORE INTO english_A1_rules VALUES (?, ?, ?)");
+    for (let i = 0; i < times.length; i++) {
+        let rule = times[i];
+        rules.run(rule.name, rule.description, rule.example);
+    }
 }
 
 const userEnglishLevel = (engLevel, userId) => {
@@ -43,12 +48,47 @@ const userEnglishLevel = (engLevel, userId) => {
     })
 }
 
-const getUserLevel = (interaction, userId) => {
-    db.get("SELECT id, engLevel FROM users WHERE id = ?", [userId], (err, row) => {
+const getUserLevel = (interaction, userId, language) => {
+    db.get("SELECT id, engLevel, polishLevel FROM users WHERE id = ?", [userId], (err, row) => {
         if (err) {
             console.error(err);
         }
-        interaction.reply(`Your english level is ${row.engLevel}`)
+        if (language == 'english') {
+            if (row.engLevel == 'no data') {
+                interaction.reply('Complete language test first!');
+            }
+            else {
+                interaction.reply(`Your english level is ${row.engLevel}`);
+            }
+        }
+        if (language == 'polish') {
+            if (row.polishLevel == 'no data') {
+                interaction.reply('Complete language test first!');
+            }
+            else {
+                interaction.reply(`Your polish level is ${row.polishLevel}`);
+            }
+        }
+    })
+}
+
+const getEnglishA1Rule = (interaction, rule) => {
+    db.get("SELECT name, description, example FROM english_A1_rules WHERE name = ?", [rule], (err, row) => {
+        if (err) {
+            console.error(err);
+        }
+        if (rule == 'presentSimple') {
+            interaction.reply(`${row.name} \n${row.description} \n ${row.example}`);
+        }
+        if (rule == 'pastSimple') {
+            interaction.reply(`${row.name} \n${row.description} \n ${row.example}`);
+        }
+        if (rule == 'presentContinious') {
+            interaction.reply(`${row.name} \n${row.description} \n ${row.example}`);
+        }
+        if (rule == 'pastContinious') {
+            interaction.reply(`${row.name} \n${row.description} \n ${row.example}`);
+        }
     })
 }
 
@@ -63,4 +103,5 @@ module.exports = {
     userLogin,
     userEnglishLevel,
     getUserLevel,
+    getEnglishA1Rule
 }
