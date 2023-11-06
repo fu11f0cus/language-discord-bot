@@ -92,6 +92,10 @@ const getEnglishA1Rule = (interaction, rule) => {
     })
 }
 
+const wordKnowledgeTable = (userId) => {
+    db.run(`CREATE TABLE IF NOT EXISTS ${userId} (word TEXT, answer1 INT, answer2 INT, answer3 INT, knowledge INT)`);
+}
+
 const userLogin = function(id, name, globalName, points) {
     const userPush = db.prepare("INSERT OR IGNORE INTO users VALUES (?, ?, ?, ?, ?, ?)");
     userPush.run(id, name, globalName, points, 'no data', 'no data');
@@ -103,5 +107,6 @@ module.exports = {
     userLogin,
     userEnglishLevel,
     getUserLevel,
-    getEnglishA1Rule
+    getEnglishA1Rule,
+    wordKnowledgeTable
 }

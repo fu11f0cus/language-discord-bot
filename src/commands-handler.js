@@ -1,7 +1,7 @@
 const { db, userLogin } = require('../db.js');
 const { loginPoints, checkMyPoints } = require('./points/points.js');
 const { quizBuilder } = require('./quiz/eng_level_quiz.js');
-const { getUserLevel, getEnglishA1Rule } = require('../db.js');
+const { getUserLevel, getEnglishA1Rule, wordKnowledgeTable } = require('../db.js');
 
 const DAY = 86400;
 
@@ -18,6 +18,7 @@ const slashCommandsHandler = async (interaction) => {
             }
             if (row.count > 0) {
                 interaction.reply(`${username}, you are already registered!`);
+                wordKnowledgeTable(`${username}_${id}`);
             }
             else {
                 userLogin(id, username, globalName, 0);
