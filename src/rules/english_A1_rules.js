@@ -26,7 +26,7 @@ const pastContinious = {
     "He was playing football at 11 o'clock - Он играл в футбол в 11 часов, \nHe was reading when somebody knocked at his window - Он читал, когда кто-то постучал в окно",
 };
 
-const times = [
+const tenses = [
     presentSimple, presentContinious, pastSimple, pastContinious
 ];
 
@@ -58,5 +58,5 @@ const prepositions = {};
 const unions = {};
 
 module.exports = {
-    times
+    tenses
 }

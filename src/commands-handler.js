@@ -18,10 +18,10 @@ const slashCommandsHandler = async (interaction) => {
             }
             if (row.count > 0) {
                 interaction.reply(`${username}, you are already registered!`);
-                wordKnowledgeTable(`${username}_${id}`);
             }
             else {
                 userLogin(id, username, globalName, 0);
+                wordKnowledgeTable(`${username}_${id}`);
                 interaction.reply(`${username}, thanks for registration!`);
             }
         })

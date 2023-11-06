@@ -1,6 +1,6 @@
 const sqlite3 = require('sqlite3');
 const { eng_level_test, eng_trueFalse } = require('./src/questions-and-commands/level_test_questions.js');
-const { times } = require('./src/rules/english_A1_rules.js')
+const { tenses } = require('./src/rules/english_A1_rules.js')
 
 const db = new sqlite3.Database('discord-bot.db');
 
@@ -32,11 +32,16 @@ const databasePushing = () => {
 
 const englishA1Rules = () => {
     const rules = db.prepare("INSERT OR IGNORE INTO english_A1_rules VALUES (?, ?, ?)");
-    for (let i = 0; i < times.length; i++) {
-        let rule = times[i];
+    for (let i = 0; i < tenses.length; i++) {
+        let rule = tenses[i];
         rules.run(rule.name, rule.description, rule.example);
     }
 }
+
+const irregularVerbsTable = () => {
+    db.run("CREATE TABLE IF NOT EXISTS irregularVerbs (infinitive TEXT, PastSimpleV2 TEXT, Participle2V3 TEXT, translate TEXT)")
+}
+
 
 const userEnglishLevel = (engLevel, userId) => {
     const request = "UPDATE users SET engLevel = ? WHERE id = ?";
