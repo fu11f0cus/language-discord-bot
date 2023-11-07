@@ -34,15 +34,21 @@ const slashCommandsHandler = async (interaction) => {
         interaction.reply('You just received 10 points. Claim another 10 points in 24 hours');
     }
     if (interaction.commandName == 'language-level-test') {
-        if (userLevel(interaction, interaction.user.id, 'english') == 'no data') {
-            if (options.getString('language') == 'english') {
-                interaction.reply('Starting test. You have 15 seconds for each question.');
-                quizBuilder(interaction);
-            }
-        }
-        else {
-            interaction.reply('Test is already completed!');
-        }
+        userLevel(interaction.user.id, 'english')
+            .then((level) => {
+                if (level == 'no data') {
+                    if (options.getString('language') == 'english') {
+                        interaction.reply('Starting test. You have 15 seconds for each question.');
+                        quizBuilder(interaction);
+                    }
+                }
+                else {
+                    interaction.reply('Test is already completed!');
+                }
+            })
+            .catch((error) => {
+                console.error('An error occurred:', error);
+            });
     }
     if (interaction.commandName == 'my-level') {
         if (options.getString('language') == 'english') {

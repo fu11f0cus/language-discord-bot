@@ -83,19 +83,37 @@ const getUserLevel = (interaction, userId, language) => {
     })
 }
 
-const userLevel = (interaction, userId, language) => {
-    db.get("SELECT id, engLevel, polishLevel FROM users WHERE id = ?", [userId], (err, row) => {
+// const userLevel = (interaction, userId, language) => {
+//     db.get("SELECT id, engLevel, polishLevel FROM users WHERE id = ?", [userId], (err, row) => {
+//         if (err) {
+//             console.error(err);
+//             return;
+//         }
+//         if (language == 'english') {
+//             level = row.engLevel;
+//         }
+//         else {
+//             level = row.polishLevel;
+//         }
+//     })
+// }
+
+const userLevel = (userId, language) => {
+    return new Promise((resolve, reject) => {
+      db.get("SELECT id, engLevel, polishLevel FROM users WHERE id = ?", [userId], (err, row) => {
         if (err) {
-            console.error(err);
+          console.error(err);
+          reject(err);
+        } else {
+          let level;
+          if (language == 'english') {
+            level = row.engLevel;
+          }
+          resolve(level);
         }
-        if (language == 'english') {
-            return row.engLevel;
-        }
-        else {
-            return row.polishLevel;
-        }
-    })
-}
+      });
+    });
+  }
 
 const getEnglishA1Rule = (interaction, rule) => {
     db.get("SELECT name, description, example FROM english_A1_rules WHERE name = ?", [rule], (err, row) => {
