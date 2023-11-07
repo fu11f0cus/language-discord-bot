@@ -145,6 +145,10 @@ const userLogin = function(id, name, globalName, points) {
     userPush.finalize();
 }
 
+const SentencesA1Table = () => {
+    db.run("CREATE TABLE IF NOT EXISTS englishA1_sentences (sentence TEXT, answer1 TEXT, answer2 TEXT, answer3 TEXT, correct TEXT)");
+}
+
 module.exports = {
     db,
     userLogin,
