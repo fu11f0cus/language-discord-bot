@@ -1,7 +1,7 @@
 const { db, userLogin } = require('../db.js');
 const { loginPoints, checkMyPoints } = require('./points/points.js');
 const { quizBuilder } = require('./quiz/eng_level_quiz.js');
-const { getUserLevel, getEnglishA1Rule, wordKnowledgeTable } = require('../db.js');
+const { getUserLevel, getEnglishA1Rule, wordKnowledgeTable, userLevel } = require('../db.js');
 
 const DAY = 86400;
 
@@ -33,9 +33,16 @@ const slashCommandsHandler = async (interaction) => {
         loginPoints(interaction.user.id);
         interaction.reply('You just received 10 points. Claim another 10 points in 24 hours');
     }
-    if (interaction.commandName == 'language-level-test' && options.getString('language') == 'english') {
-        interaction.reply('Starting test. You have 15 seconds for each question.');
-        quizBuilder(interaction);
+    if (interaction.commandName == 'language-level-test') {
+        if (userLevel(interaction, interaction.user.id, 'english') == 'no data') {
+            if (options.getString('language') == 'english') {
+                interaction.reply('Starting test. You have 15 seconds for each question.');
+                quizBuilder(interaction);
+            }
+        }
+        else {
+            interaction.reply('Test is already completed!');
+        }
     }
     if (interaction.commandName == 'my-level') {
         if (options.getString('language') == 'english') {

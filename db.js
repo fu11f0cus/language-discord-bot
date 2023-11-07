@@ -1,6 +1,7 @@
 const sqlite3 = require('sqlite3');
 const { eng_level_test, eng_trueFalse } = require('./src/questions-and-commands/level_test_questions.js');
 const { tenses } = require('./src/rules/english_A1_rules.js')
+const { AllIrregularVerbs } = require('./src/vocabulary/irregularVerbs.js');
 
 const db = new sqlite3.Database('discord-bot.db');
 
@@ -39,7 +40,12 @@ const englishA1Rules = () => {
 }
 
 const irregularVerbsTable = () => {
-    db.run("CREATE TABLE IF NOT EXISTS irregularVerbs (infinitive TEXT, PastSimpleV2 TEXT, Participle2V3 TEXT, translate TEXT)")
+    db.run("CREATE TABLE IF NOT EXISTS irregularVerbs (infinitive TEXT, PastSimpleV2 TEXT, Participle2V3 TEXT, translate TEXT)");
+    const sql = db.prepare("INSERT INTO irregularVerbs VALUES (?, ?, ?, ?)");
+    for (let i = 0; i < AllIrregularVerbs.length; i++) {
+        let verb = AllIrregularVerbs[i];
+        sql.run(verb.infinitive, verb.pastSimple, verb.participle, verb.translate);
+    }
 }
 
 
@@ -73,6 +79,20 @@ const getUserLevel = (interaction, userId, language) => {
             else {
                 interaction.reply(`Your polish level is ${row.polishLevel}`);
             }
+        }
+    })
+}
+
+const userLevel = (interaction, userId, language) => {
+    db.get("SELECT id, engLevel, polishLevel FROM users WHERE id = ?", [userId], (err, row) => {
+        if (err) {
+            console.error(err);
+        }
+        if (language == 'english') {
+            return row.engLevel;
+        }
+        else {
+            return row.polishLevel;
         }
     })
 }
@@ -113,5 +133,6 @@ module.exports = {
     userEnglishLevel,
     getUserLevel,
     getEnglishA1Rule,
-    wordKnowledgeTable
+    wordKnowledgeTable,
+    userLevel
 }
