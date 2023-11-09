@@ -85,6 +85,10 @@ const commands = [
       },
     ],
   },
+  {
+    name: 'word',
+    description: 'word to translate'
+  }
 ];
 
 module.exports = {

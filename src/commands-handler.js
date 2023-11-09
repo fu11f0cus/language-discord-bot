@@ -2,6 +2,7 @@ const { db, userLogin } = require('../db.js');
 const { loginPoints, checkMyPoints } = require('./points/points.js');
 const { quizBuilder } = require('./quiz/eng_level_quiz.js');
 const { getUserLevel, getEnglishA1Rule, wordKnowledgeTable, userLevel } = require('../db.js');
+const { randomWord } = require('./words-to-translate/eng/english_A1_words.js');
 
 const DAY = 86400;
 
@@ -71,6 +72,9 @@ const slashCommandsHandler = async (interaction) => {
         if (options.getString('rule') == 'pastContinious') {
             getEnglishA1Rule(interaction, 'pastContinious');
         }
+    }
+    if (interaction.commandName == 'word') {
+        randomWord();
     }
 };
 
