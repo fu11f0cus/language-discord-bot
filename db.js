@@ -2,6 +2,7 @@ const sqlite3 = require('sqlite3');
 const { eng_level_test, eng_trueFalse } = require('./src/questions-and-commands/level_test_questions.js');
 const { tenses } = require('./src/rules/english_A1_rules.js')
 const { AllIrregularVerbs } = require('./src/vocabulary/irregularVerbs.js');
+const { A1_wordlist } = require('./src/vocabulary/english_A1_vocabulary.js')
 
 const db = new sqlite3.Database('discord-bot.db');
 
@@ -147,6 +148,15 @@ const userLogin = function(id, name, globalName, points) {
 
 const SentencesA1Table = () => {
     db.run("CREATE TABLE IF NOT EXISTS englishA1_sentences (sentence TEXT, answer1 TEXT, answer2 TEXT, answer3 TEXT, correct TEXT)");
+}
+
+const english_A1_vocabulary = () => {
+    // db.run("CREATE TABLE IF NOT EXISTS english_A1_vocabulary (word TEXT, translate TEXT)");
+    const sql = db.prepare("INSERT INTO english_A1_vocabulary VALUES (?, ?)")
+    for (let i = 0; i < A1_wordlist.length; i++) {
+        const word = A1_wordlist[i];
+        sql.run(word.word, word.translate);
+    }
 }
 
 module.exports = {
