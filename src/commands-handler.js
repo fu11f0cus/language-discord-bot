@@ -74,7 +74,7 @@ const slashCommandsHandler = async (interaction) => {
         }
     }
     if (interaction.commandName == 'word') {
-        randomWord();
+        randomWord(interaction);
     }
 };
 
