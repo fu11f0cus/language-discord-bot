@@ -84,21 +84,6 @@ const getUserLevel = (interaction, userId, language) => {
     })
 }
 
-// const userLevel = (interaction, userId, language) => {
-//     db.get("SELECT id, engLevel, polishLevel FROM users WHERE id = ?", [userId], (err, row) => {
-//         if (err) {
-//             console.error(err);
-//             return;
-//         }
-//         if (language == 'english') {
-//             level = row.engLevel;
-//         }
-//         else {
-//             level = row.polishLevel;
-//         }
-//     })
-// }
-
 const userLevel = (userId, language) => {
     return new Promise((resolve, reject) => {
       db.get("SELECT id, engLevel, polishLevel FROM users WHERE id = ?", [userId], (err, row) => {
@@ -159,6 +144,29 @@ const english_A1_vocabulary = () => {
     }
 }
 
+const english_A1_vocabulary_questions = (obj) => {
+    // db.run("CREATE TABLE IF NOT EXISTS english_A1_word_questions (word TEXT, option1 TEXT, option2 TEXT, option3 TEXT, correct TEXT)");
+    const sql = db.prepare("INSERT INTO english_A1_word_questions VALUES (?, ?, ?, ?, ?)");
+    if (obj.mainWord) {
+        sql.run(obj.mainWord, obj.option1, obj.option2, obj.option3, obj.mainCorrect);
+    }
+}
+
+const checkingForDublicates = () => {
+    db.all("SELECT word, COUNT(*) as count FROM english_A1_word_questions GROUP BY word HAVING COUNT(*) > 1", (err, rows) => {
+        if (err) {
+            console.error(err);
+        }
+        if (rows.length > 1) {
+            console.log(`Dublicates in word: ${rows}`)
+        }
+        else {
+            console.log('no dublicates');
+        }
+    })
+}
+
+
 module.exports = {
     db,
     userLogin,
@@ -166,5 +174,7 @@ module.exports = {
     getUserLevel,
     getEnglishA1Rule,
     wordKnowledgeTable,
-    userLevel
+    userLevel,
+    english_A1_vocabulary_questions,
+    checkingForDublicates
 }
