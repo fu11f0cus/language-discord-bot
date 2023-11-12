@@ -2,7 +2,7 @@ const { db, english_A1_vocabulary_questions } = require('../../../db.js');
 const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require('discord.js');
 
 const randomWord = (interaction) => {
-    const random = Math.round(Math.random() * 602);
+    const random = Math.round(Math.random() * 533);
     db.get(`SELECT * FROM english_A1_word_questions LIMIT 1 OFFSET ${random - 1}`, (err, row) => {
         if (err) {
             console.error(err);
@@ -11,7 +11,7 @@ const randomWord = (interaction) => {
         const option1 = row.option1;
         const option2 = row.option2;
         const option3 = row.option3;
-        const translate = row.translate;
+        const correct = row.correct;
         const embed = new EmbedBuilder()
             .setTitle(`${word}`)
             .setDescription(`A: ${option1} \nB: ${option2} \nC: ${option3}`)
@@ -21,7 +21,22 @@ const randomWord = (interaction) => {
         buttons.addComponents(new ButtonBuilder().setLabel('B').setStyle(ButtonStyle.Primary).setCustomId('2'));
         buttons.addComponents(new ButtonBuilder().setLabel('C').setStyle(ButtonStyle.Primary).setCustomId('3'));
 
-        interaction.channel.send({ embeds: [embed], components: [buttons]});
+        interaction.channel.send({ embeds: [embed], components: [buttons]}).then(() => {
+            const filter = (buttonInteraction) => buttonInteraction.customId === '1' || buttonInteraction.customId === '2' || buttonInteraction.customId === '3';
+            interaction.channel.awaitMessageComponent({ filter, time: 15000 })
+            .then((buttonInteraction) => {
+                const userAnswer = buttonInteraction.customId;
+                if (userAnswer == correct) {
+                    buttonInteraction.reply('correct');
+                }
+                else {
+                    buttonInteraction.reply('incorrect');
+                }
+            })
+            .catch(() => {
+                buttonInteraction.reply('time is up!');
+            })
+        })
     })
 }
 
@@ -66,12 +81,15 @@ const allWordsTest = () => {
         }
         if (randomCorrect == 1) {
             a = correct;
+            correct = 1;
         }
         else if (randomCorrect == 2) {
             b = correct;
+            correct = 2;
         }
         else {
             c = correct;
+            correct = 3;
         }
         let obj = {
             mainWord: word,
@@ -80,7 +98,7 @@ const allWordsTest = () => {
             option3: c,
             mainCorrect: correct,
         }
-        english_A1_vocabulary_questions(obj);
+        // english_A1_vocabulary_questions(obj);
     })
 }
 
