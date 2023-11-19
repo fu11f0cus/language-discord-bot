@@ -1,4 +1,4 @@
-const { db, english_A1_vocabulary_questions } = require('../../../db.js');
+const { db, english_A1_vocabulary_questions, wordKnowledgeTablePushing } = require('../../../db.js');
 const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require('discord.js');
 
 const randomWord = (interaction) => {
@@ -28,6 +28,7 @@ const randomWord = (interaction) => {
                 const userAnswer = buttonInteraction.customId;
                 if (userAnswer == correct) {
                     buttonInteraction.reply('correct');
+                    wordKnowledgeTablePushing(word, true, `${interaction.user.username}_${interaction.user.id}`);
                 }
                 else {
                     buttonInteraction.reply('incorrect');

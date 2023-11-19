@@ -75,10 +75,6 @@ const slashCommandsHandler = async (interaction) => {
     }
     if (interaction.commandName == 'word') {
         randomWord(interaction);
-        // for (let i = 0; i < 630; i++) {
-        //     allWordsTest();
-        // }
-        // checkingForDublicates();
     }
 };
 

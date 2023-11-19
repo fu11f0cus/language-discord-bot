@@ -122,7 +122,18 @@ const getEnglishA1Rule = (interaction, rule) => {
 }
 
 const wordKnowledgeTable = (userId) => {
-    db.run(`CREATE TABLE IF NOT EXISTS ${userId} (word TEXT, answer1 INT, answer2 INT, answer3 INT, knowledge INT)`);
+    db.run(`CREATE TABLE IF NOT EXISTS ${userId} (word TEXT, answers INT, knowledge BOOL)`);
+}
+
+const wordKnowledgeTablePushing = (word, answer, userId) => {
+    const sql = db.prepare(`INSERT OR IGNORE INTO ${userId} VALUES (?, ?, ?)`);
+    if (answer) {
+        sql.run(word, 1, false);
+        sql.finalize();
+    }
+    else {
+        sql.run(word, 0, false);
+    }
 }
 
 const userLogin = function(id, name, globalName, points) {
@@ -176,5 +187,6 @@ module.exports = {
     wordKnowledgeTable,
     userLevel,
     english_A1_vocabulary_questions,
-    checkingForDublicates
+    checkingForDublicates,
+    wordKnowledgeTablePushing
 }
