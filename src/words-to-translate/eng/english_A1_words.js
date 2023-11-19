@@ -32,10 +32,8 @@ const randomWord = (interaction) => {
                 }
                 else {
                     buttonInteraction.reply('incorrect');
+                    wordKnowledgeTablePushing(word, false, `${interaction.user.username}_${interaction.user.id}`);
                 }
-            })
-            .catch(() => {
-                buttonInteraction.reply('time is up!');
             })
         })
     })
