@@ -1,6 +1,15 @@
 const { db, english_A1_vocabulary_questions, wordKnowledgeTablePushing } = require('../../../db.js');
 const { EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require('discord.js');
 
+const selectCount = (word, userId) => {
+    db.get(`SELECT word, answers FROM ${userId} WHERE word = ?`, [word], (err, row) => {
+        if (err) {
+            console.error(err);
+        }
+        console.log(row.answers);
+    })
+}
+
 const randomWord = (interaction) => {
     const random = Math.round(Math.random() * 533);
     db.get(`SELECT * FROM english_A1_word_questions LIMIT 1 OFFSET ${random - 1}`, (err, row) => {
@@ -29,6 +38,7 @@ const randomWord = (interaction) => {
                 if (userAnswer == correct) {
                     buttonInteraction.reply('correct');
                     wordKnowledgeTablePushing(word, true, `${interaction.user.username}_${interaction.user.id}`);
+                    selectCount(word, `${interaction.user.username}_${interaction.user.id}`);
                 }
                 else {
                     buttonInteraction.reply('incorrect');
